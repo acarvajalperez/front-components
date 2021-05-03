@@ -1,0 +1,19 @@
+/*
+   CSS styling examples for the Vaadin app.
+   Visit https://vaadin.com/docs/flow/theme/theming-overview.html and
+   https://vaadin.com/themes/lumo for more information.
+*/
+
+vaadin-app-layout h1[slot="navbar"] {
+  margin: 0;
+  font-size: var(--lumo-font-size-xl);
+}
+
+vaadin-app-layout h1[slot="drawer"] {
+  margin: 8px 16px;
+  font-size: var(--lumo-font-size-xl);
+}
+
+h2 {
+  font-size: var(--lumo-font-size-xl);
+}
