@@ -1,4 +1,4 @@
-package es.opplus.app.views;
+package es.opplus.front.views;
 
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.html.Span;

@@ -4,15 +4,8 @@ $_documentContainer.innerHTML = `
 <custom-style>
   <style>
 
-      :host(:not([dir='rtl']):not([overlay])) [part='drawer'] {
-          border-right: 0px;
-      }
-
-    .pro-drawer {
-    	//background: var(--lumo-contrast-5pct);
-    	background: var(--lumo-base-color);
-    	//box-shadow: 0px 0px 0px 0px red;
-        border-right-width: var(--lumo-space-l);
+    :host(:not([dir='rtl']):not([overlay])) [part='drawer'] {
+        border-right: 0px;
     }
 
     .pro-drawer-header {
@@ -25,6 +18,22 @@ $_documentContainer.innerHTML = `
         background-position-x: center;
         background-position-y: center;
         background-repeat: no-repeat;
+    }
+
+    .pro-drawer-new_operation-button {
+        width: 100%;
+        border-radius: 20px;
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+
+      /*
+
+    .pro-drawer {
+    	//background: var(--lumo-contrast-5pct);
+    	background: var(--lumo-base-color);
+    	//box-shadow: 0px 0px 0px 0px red;
+        border-right-width: var(--lumo-space-l);
     }
 
     .pro-drawer-header:hover {
@@ -56,13 +65,6 @@ $_documentContainer.innerHTML = `
 
     .pro-drawer-tab {
         height: 50px;
-    }
-
-    .pro-drawer-new_operation-button {
-        width: 100%;
-        border-radius: 20px;
-        margin-left: 2em;
-        margin-right: 2em;
     }
 
     .pro-drawer-tab:hover {
@@ -114,6 +116,7 @@ $_documentContainer.innerHTML = `
         //min-width: calc (var(--lumo-icon-size-l) * 0.5);
         //min-height: calc (var(--lumo-icon-size-m) * 0.5);
     }
+    */
 
     </style>
   </template>

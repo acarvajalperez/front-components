@@ -1,5 +1,8 @@
 package es.opplus.front;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -11,13 +14,16 @@ import javax.servlet.annotation.WebListener;
  */
 @WebListener
 public class Bootstrap implements ServletContextListener {
+
+    private static final Logger log = LoggerFactory.getLogger(Bootstrap.class);
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Server starting");
+        log.info("Server starting");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("Server stopping");
+        log.info("Server stopping");
     }
 }

@@ -2,16 +2,15 @@ package es.opplus.front.components.layout;
 
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.IronIcon;
@@ -27,7 +26,6 @@ import es.opplus.front.components.ThemeComboBox;
 import es.opplus.front.components.dialog.ProfileDialog;
 import es.opplus.front.services.notifications.BrowserNotifications;
 
-import java.util.Locale;
 import java.util.Optional;
 
 @CssImport("./styles/views/main/main-view.css")
@@ -35,15 +33,14 @@ import java.util.Optional;
 @JsModule("./styles/shared-styles.js")
 @JsModule("./theme/profesional/components/pro-drawer.js")
 @JsModule("./theme/profesional/components/pro-navigation-bar.js")
-
 @StyleSheet("https://fonts.googleapis.com/css?family=Montserrat")
+
 public abstract class OpplusLayout extends AppLayout {
 
     private final Tabs menu;
-    private H1 viewTitle;
     private NavigationBar navigationBar;
 
-    public OpplusLayout() {
+    protected OpplusLayout() {
 
         menu = new Tabs();
         setPrimarySection(Section.DRAWER);
@@ -121,6 +118,22 @@ public abstract class OpplusLayout extends AppLayout {
         themeLayout.setWidthFull();
         themeLayout.setPadding(true);
 
+        Button newOperationButton = new Button("Nueva operación");
+        newOperationButton.setIcon(FontAwesome.Solid.PLUS.create());
+        newOperationButton.addClassName("pro-drawer-new_operation-button");
+        newOperationButton.addThemeVariants(ButtonVariant.LUMO_LARGE, ButtonVariant.LUMO_PRIMARY);
+        newOperationButton.setWidthFull();
+
+        /*
+        newOperationButton.addClickListener(event -> {
+            UI.getCurrent().navigate(NewOperationView.class);
+        });
+         */
+
+        HorizontalLayout horizontalLayout = new HorizontalLayout(newOperationButton);
+        horizontalLayout.setPadding(true);
+
+
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();
         layout.setPadding(false);
@@ -128,7 +141,8 @@ public abstract class OpplusLayout extends AppLayout {
         layout.getThemeList().set("spacing-s", true);
         layout.setAlignItems(FlexComponent.Alignment.STRETCH);
         menu.setHeightFull();
-        layout.add(logoLayout, new Button("Alta"), menu, themeLayout);
+
+        layout.add(logoLayout, horizontalLayout, menu, themeLayout);
         return layout;
     }
 

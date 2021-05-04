@@ -2,7 +2,10 @@ package es.opplus.front.views;
 
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.avatar.Avatar;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -12,9 +15,10 @@ import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import es.opplus.app.views.GlobalInboxView;
-import es.opplus.app.views.OperationsView;
-import es.opplus.app.views.PersonalInboxView;
+import com.vaadin.flow.server.VaadinSession;
+import es.opplus.front.views.GlobalInboxView;
+import es.opplus.front.views.OperationsView;
+import es.opplus.front.views.PersonalInboxView;
 import es.opplus.front.components.layout.OpplusAvatar;
 import es.opplus.front.components.layout.OpplusLayout;
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -31,9 +35,11 @@ public class TasksInbox extends OpplusLayout implements AfterNavigationObserver 
 
     @Override
     protected Component[] createMenuItems() {
+        Button button = new Button("1324");
+        button.addThemeVariants(ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_TERTIARY_INLINE);
         return new Tab[]{
-                createMenuItem(FontAwesome.Solid.INBOX.create(), "Pendientes", new Label("132"), GlobalInboxView.class),
-                createMenuItem(FontAwesome.Solid.INBOX.create(), "Personal", new Label("99"), PersonalInboxView.class),
+                createMenuItem(FontAwesome.Solid.INBOX.create(), "Pendientes", button, GlobalInboxView.class),
+                createMenuItem(FontAwesome.Solid.INBOX.create(), "Personal", button, PersonalInboxView.class),
                 createMenuItem(FontAwesome.Solid.DOWNLOAD.create(), "Operaciones", null, OperationsView.class),
                 createMenuItem(FontAwesome.Solid.DOWNLOAD.create(), "Operaciones", null, ServiceInterfacesRoute.class),
                 createMenuItem(FontAwesome.Solid.BUG.create(), "Debug", null, DebugView.class)
@@ -45,6 +51,8 @@ public class TasksInbox extends OpplusLayout implements AfterNavigationObserver 
 
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
-        getNavigationBar().setAvatar(new OpplusAvatar(jwt.getClaim("preferred_username").toString().toUpperCase(Locale.ROOT)));
+        getNavigationBar().setAvatar(new Avatar(
+                jwt.getClaim("name").toString().toUpperCase(Locale.ROOT))
+        );
     }
 }
