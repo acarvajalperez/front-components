@@ -9,7 +9,7 @@ $_documentContainer.innerHTML = `
   <style>
     html {
 
-        --lumo-font-family: "Manjari", 'ubuntu', "Ubuntu", "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+        --lumo-font-family: "Montserrat", 'ubuntu', "Ubuntu", "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
 
         --lumo-font-size: 1rem;
         --lumo-font-size-xxxl: 1.375rem;
@@ -130,7 +130,7 @@ $_documentContainer.innerHTML = `
 
         --lumo-base-color: #FFFFFF;
 
-        --lumo-font-family: "Manjari", "Montserrat", 'ubuntu', "Ubuntu", "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+        --lumo-font-family: "Montserrat", 'ubuntu', "Ubuntu", "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
         --lumo-body-text-color: hsla(214, 40%, 16%, 0.94);
         --lumo-link-color: #009fff;
 

@@ -1,4 +1,4 @@
-package es.opplus.front.services.serviceinterfaces;
+package es.opplus.front.services;
 
 import com.urosporo.quarkus.vaadin.cdi.annotation.VaadinServiceEnabled;
 import com.urosporo.quarkus.vaadin.cdi.annotation.VaadinServiceScoped;

@@ -1,4 +1,4 @@
-package es.opplus.front.services.serviceinterfaces;
+package es.opplus.front.services;
 
 import com.helger.commons.annotation.VisibleForTesting;
 import com.urosporo.quarkus.vaadin.cdi.annotation.VaadinServiceEnabled;

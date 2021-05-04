@@ -6,6 +6,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import es.opplus.front.views.TasksInbox;
 
 /**
  * Port of the "Skeleton Starter" Vaadin app on top of Quarkus+Undertow.

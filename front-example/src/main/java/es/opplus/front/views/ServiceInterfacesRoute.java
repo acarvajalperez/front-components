@@ -1,4 +1,4 @@
-package es.opplus.app.views;
+package es.opplus.front.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
@@ -8,9 +8,10 @@ import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import es.opplus.front.services.serviceinterfaces.CustomErrorHandler;
-import es.opplus.front.services.serviceinterfaces.CustomSystemMessagesProvider;
-import es.opplus.front.services.serviceinterfaces.ResourceBundleI18nProvider;
+import es.opplus.front.services.CustomErrorHandler;
+import es.opplus.front.services.CustomSystemMessagesProvider;
+import es.opplus.front.services.ResourceBundleI18nProvider;
+import es.opplus.front.views.TasksInbox;
 
 import java.util.Locale;
 

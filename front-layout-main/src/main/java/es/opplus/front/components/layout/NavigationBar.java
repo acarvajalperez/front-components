@@ -2,23 +2,24 @@ package es.opplus.front.components.layout;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.avatar.Avatar;
+import com.vaadin.flow.component.avatar.AvatarGroup;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-@JsModule("./theme/profesional/components/pro-drawer.js")
-@JsModule("./theme/profesional/components/pro-navigation-bar.js")
 public class NavigationBar extends HorizontalLayout {
 
-    private Label titleComponent;
+    private Label   titleComponent;
+    private Avatar  avatar;
 
     public NavigationBar(Component logo, String titleString, Component... actions) {
         addClassName("nav-bar");
 
         this.titleComponent = new Label(titleString);
         this.titleComponent.setClassName("nav-bar-title");
+        this.setHeight("50px");
 
         /*
         if (logo instanceof Image) {
@@ -35,11 +36,26 @@ public class NavigationBar extends HorizontalLayout {
         add(new DrawerToggle(), titleComponent);
         for (Component component : actions) {
             if (component instanceof Button)
-                ((Button)component).addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+                ((Button) component).addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             add(component);
         }
     }
+
+    public NavigationBar(Component logo, String titleString, Avatar avatar, Component... actions) {
+        this(logo,titleString,actions);
+        this.avatar = avatar;
+        add(avatar);
+    }
+
     public void setTitleComponent(String titleComponent) {
         this.titleComponent.setText(titleComponent);
+    }
+
+    public void setAvatar(Avatar avatar) {
+        if (this.avatar != null)
+            this.replace(this.avatar, avatar);
+        else
+            this.add(avatar);
+        this.avatar = avatar;
     }
 }

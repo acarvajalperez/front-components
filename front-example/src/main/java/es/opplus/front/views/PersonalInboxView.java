@@ -5,6 +5,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import es.opplus.front.views.TasksInbox;
 
 /**
  * A very simple demo route, demoes the ability of Quarkus+Undertow to discover

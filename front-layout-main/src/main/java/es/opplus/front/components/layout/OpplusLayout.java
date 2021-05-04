@@ -2,6 +2,7 @@ package es.opplus.front.components.layout;
 
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -21,12 +22,20 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
+import es.opplus.front.app.tasksinbox.domain.OpplusUser;
 import es.opplus.front.components.ThemeComboBox;
+import es.opplus.front.components.dialog.ProfileDialog;
+import es.opplus.front.services.notifications.BrowserNotifications;
 
+import java.util.Locale;
 import java.util.Optional;
 
 @CssImport("./styles/views/main/main-view.css")
+
 @JsModule("./styles/shared-styles.js")
+@JsModule("./theme/profesional/components/pro-drawer.js")
+@JsModule("./theme/profesional/components/pro-navigation-bar.js")
+
 @StyleSheet("https://fonts.googleapis.com/css?family=Montserrat")
 public abstract class OpplusLayout extends AppLayout {
 
@@ -41,8 +50,13 @@ public abstract class OpplusLayout extends AppLayout {
         navigationBar = new NavigationBar(
                 new Span("NavBar"),
                 "Bandeja de tareas",
-                new Button(FontAwesome.Solid.BELL.create()),
-                new Avatar("Antonio Carvajal")
+                new Button(FontAwesome.Solid.BELL.create(), listener -> {
+                    ProfileDialog profileDialog = new ProfileDialog(new OpplusUser());
+                    //profileDialog.setImageSrc(urlImg);
+                    profileDialog.setCloseOnEsc(true);
+                    profileDialog.setCloseOnOutsideClick(true);
+                    profileDialog.open();
+                })
         );
         addToNavbar(navigationBar);
         createMenu();
@@ -83,6 +97,19 @@ public abstract class OpplusLayout extends AppLayout {
     }
      */
 
+    public void setNavigationBar(NavigationBar navigationBar) {
+        this.navigationBar = navigationBar;
+        addToNavbar(navigationBar);
+    }
+
+    public NavigationBar getNavigationBar() {
+        return navigationBar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        navigationBar.setAvatar(avatar);
+    }
+
     private Component createDrawerContent() {
 
         HorizontalLayout logoLayout = new HorizontalLayout();
@@ -101,7 +128,7 @@ public abstract class OpplusLayout extends AppLayout {
         layout.getThemeList().set("spacing-s", true);
         layout.setAlignItems(FlexComponent.Alignment.STRETCH);
         menu.setHeightFull();
-        layout.add(logoLayout, menu, themeLayout);
+        layout.add(logoLayout, new Button("Alta"), menu, themeLayout);
         return layout;
     }
 
@@ -117,7 +144,8 @@ public abstract class OpplusLayout extends AppLayout {
         });
     }
 
-    protected abstract Component[] createMenuItems(); /* {
+    protected abstract Component[] createMenuItems();
+    /* {
         return new Tab[]{
                 createTab(FontAwesome.Solid.INBOX.create(), "Enlace 1", new Label("132"), Enlace1.class),
                 createTab(FontAwesome.Solid.INBOX.create(), "Enlace 2", null, Enlace2.class)/*,
@@ -126,14 +154,14 @@ public abstract class OpplusLayout extends AppLayout {
         };
     }*/
 
-    protected Tab createTab(IronIcon icon, String text, Component suffix, Class<? extends Component> navigationTarget) {
+    protected Tab createMenuItem(IronIcon icon, String text, Component suffix, Class<? extends Component> navigationTarget) {
         final Tab tab = new Tab();
 
         icon.setSize("32px");
 
         Label tabText = new Label(text);
         tabText.getStyle().set("margin-left", "10px");
-        //tabText.setClassName("drawer-menu-label");
+        tabText.setClassName("pro-drawer-group-item");
         tabText.setWidthFull();
 
         tab.add(icon, tabText);
@@ -154,9 +182,9 @@ public abstract class OpplusLayout extends AppLayout {
             menu.setSelectedTab(null);
 
         //viewTitle.setText(getCurrentPageTitle());
+        //String title = getTranslation("view.about.title", Locale.getDefault());
         navigationBar.setTitleComponent(getTranslation(getCurrentPageTitle()));
-        //if (UI.getCurrent() != null)
-            //BrowserNotifications.extend(UI.getCurrent()).askForPermission();
+        BrowserNotifications.extend(UI.getCurrent()).askForPermission();
     }
 
     private Optional<Tab> getTabForComponent(Component component) {
