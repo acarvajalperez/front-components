@@ -8,6 +8,7 @@ import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import io.quarkus.oidc.RefreshToken;
 import io.quarkus.security.Authenticated;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -23,22 +24,33 @@ import javax.inject.Inject;
 @Authenticated
 public class DebugView extends VerticalLayout implements AfterNavigationObserver {
 
+    /**
+     * Injection point for the ID Token issued by the OpenID Connect Provider
+     */
     @Inject
-    JsonWebToken jwt;
+    JsonWebToken idToken;
+
+    /**
+     * Injection point for the Access Token issued by the OpenID Connect Provider
+     */
+    @Inject
+    JsonWebToken accessToken;
+
+    /**
+     * Injection point for the Refresh Token issued by the OpenID Connect Provider
+     */
+    @Inject
+    RefreshToken refreshToken;
 
     TextArea textAreaJwtToken;
     TextArea textAreaVaadinSession;
 
     public DebugView() {
-        textAreaJwtToken = new TextArea("Json Web Token:");
-        textAreaJwtToken.setWidthFull();
-        textAreaJwtToken.setReadOnly(true);
-
         textAreaVaadinSession = new TextArea("Vaadin Session:");
         textAreaVaadinSession.setWidthFull();
         textAreaVaadinSession.setReadOnly(true);
 
-        add(textAreaVaadinSession, textAreaJwtToken);
+        add(textAreaVaadinSession);
         //grid = new Grid<>;
 
     }
@@ -58,8 +70,19 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
                 "Last Request Timestamp: " + UI.getCurrent().getSession().getLastRequestTimestamp() + System.lineSeparator() +
                 "Locale: " + UI.getCurrent().getSession().getLocale().toString()
         );
+        showTokenInfo("ID Token: ", idToken);
+        showTokenInfo("Access Token: ", accessToken);
+        //showTokenInfo();
+        add(refreshToken.getToken());
+    }
 
-        textAreaJwtToken.setValue(jwt.toString());
+    public void showTokenInfo(String description, JsonWebToken jwt) {
+        TextArea textArea = new TextArea();
+        textArea = new TextArea(description);
+        textArea.setWidthFull();
+        //textArea.setReadOnly(true);
+
+        textArea.setValue(jwt.toString());
         add(new TextField("Preferred username", jwt.getClaim("preferred_username").toString()));
         System.out.println("Claims: " + jwt.getClaimNames());
         System.out.println("Issuer: " + jwt.getIssuer());
@@ -68,7 +91,8 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
         System.out.println("Groups: " + jwt.getGroups());
 
         for (String claim : jwt.getClaimNames()) {
-            textAreaJwtToken.setValue(textAreaJwtToken.getValue() + claim + ": " + jwt.getClaim(claim).toString() + System.lineSeparator() + System.lineSeparator());
+            textArea.setValue(textArea.getValue() + claim + ": " + jwt.getClaim(claim).toString() + System.lineSeparator() + System.lineSeparator());
         }
+        add(textArea);
     }
 }
