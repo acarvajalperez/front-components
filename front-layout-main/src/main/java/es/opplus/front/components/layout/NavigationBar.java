@@ -6,6 +6,7 @@ import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.avatar.AvatarGroup;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
@@ -17,6 +18,10 @@ public class NavigationBar extends HorizontalLayout {
     public NavigationBar(Component logo, String titleString, Component... actions) {
         addClassName("nav-bar");
 
+        if (logo instanceof Image) {
+            ((Image)logo).setClassName("nav-bar-logo-image");
+        }
+
         this.titleComponent = new Label(titleString);
         this.titleComponent.setClassName("nav-bar-title");
         this.setHeight("50px");
@@ -27,13 +32,11 @@ public class NavigationBar extends HorizontalLayout {
         }
          */
 
-        /*
         HorizontalLayout logoLayout = new HorizontalLayout();
         logoLayout.addClassName("nav-bar-logo-layout");
         logoLayout.add(new DrawerToggle(), logo);
-         */
 
-        add(new DrawerToggle(), titleComponent);
+        add(logoLayout, titleComponent);
         for (Component component : actions) {
             if (component instanceof Button)
                 ((Button) component).addThemeVariants(ButtonVariant.LUMO_PRIMARY);

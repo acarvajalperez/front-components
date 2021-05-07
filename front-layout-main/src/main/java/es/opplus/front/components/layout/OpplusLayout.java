@@ -38,14 +38,19 @@ import java.util.Optional;
 public abstract class OpplusLayout extends AppLayout {
 
     private final Tabs menu;
+    private Drawer drawer;
     private NavigationBar navigationBar;
 
     protected OpplusLayout() {
 
         menu = new Tabs();
-        setPrimarySection(Section.DRAWER);
+        //setPrimarySection(Section.DRAWER);
+
+        Span logo = new Span();
+        logo.setClassName("nav-bar-logo-image");
+
         navigationBar = new NavigationBar(
-                new Span("NavBar"),
+                logo,
                 "Bandeja de tareas",
                 new Button(FontAwesome.Solid.BELL.create(), listener -> {
                     ProfileDialog profileDialog = new ProfileDialog(new OpplusUser());
@@ -109,11 +114,6 @@ public abstract class OpplusLayout extends AppLayout {
 
     private Component createDrawerContent() {
 
-        HorizontalLayout logoLayout = new HorizontalLayout();
-        logoLayout.setClassName("pro-drawer-header");
-        logoLayout.setWidthFull();
-        logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-
         HorizontalLayout themeLayout = new HorizontalLayout(new ThemeComboBox());
         themeLayout.setWidthFull();
         themeLayout.setPadding(true);
@@ -130,10 +130,6 @@ public abstract class OpplusLayout extends AppLayout {
         });
          */
 
-        HorizontalLayout horizontalLayout = new HorizontalLayout(newOperationButton);
-        horizontalLayout.setPadding(true);
-
-
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();
         layout.setPadding(false);
@@ -142,8 +138,12 @@ public abstract class OpplusLayout extends AppLayout {
         layout.setAlignItems(FlexComponent.Alignment.STRETCH);
         menu.setHeightFull();
 
-        layout.add(logoLayout, horizontalLayout, menu, themeLayout);
-        return layout;
+        layout.add(menu);
+        drawer = new Drawer();
+        drawer.setHeader(newOperationButton);
+        drawer.setContent(layout);
+        drawer.setFooter(themeLayout);
+        return drawer;
     }
 
     private void createMenu() {
@@ -170,17 +170,20 @@ public abstract class OpplusLayout extends AppLayout {
 
     protected Tab createMenuItem(IronIcon icon, String text, Component suffix, Class<? extends Component> navigationTarget) {
         final Tab tab = new Tab();
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         icon.setSize("32px");
 
         Label tabText = new Label(text);
-        tabText.getStyle().set("margin-left", "10px");
-        tabText.setClassName("pro-drawer-group-item");
+        //tabText.getStyle().set("margin-left", "10px");
+        //tabText.setClassName("pro-drawer-group-item");
         tabText.setWidthFull();
 
-        tab.add(icon, tabText);
+        horizontalLayout.add(icon, tabText);
         if (suffix != null)
-            tab.add(suffix);
+            horizontalLayout.add(suffix);
+
+        tab.add(horizontalLayout);
         ComponentUtil.setData(tab, Class.class, navigationTarget);
         return tab;
     }

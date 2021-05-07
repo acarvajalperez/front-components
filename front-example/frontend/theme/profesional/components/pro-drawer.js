@@ -8,6 +8,13 @@ $_documentContainer.innerHTML = `
         border-right: 0px;
     }
 
+    .pro-drawer {
+    	//background: var(--lumo-contrast-5pct);
+    	background: var(--lumo-base-color);
+    	//box-shadow: 0px 0px 0px 0px red;
+        border-right-width: var(--lumo-space-l);
+    }
+
     .pro-drawer-header {
         //width: 200px;
         width: 100%;
@@ -29,12 +36,6 @@ $_documentContainer.innerHTML = `
 
       /*
 
-    .pro-drawer {
-    	//background: var(--lumo-contrast-5pct);
-    	background: var(--lumo-base-color);
-    	//box-shadow: 0px 0px 0px 0px red;
-        border-right-width: var(--lumo-space-l);
-    }
 
     .pro-drawer-header:hover {
       	//background: var(--lumo-contrast-5pct);

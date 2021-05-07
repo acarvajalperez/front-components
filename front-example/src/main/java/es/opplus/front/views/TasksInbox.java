@@ -51,8 +51,12 @@ public class TasksInbox extends OpplusLayout implements AfterNavigationObserver 
 
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
-        getNavigationBar().setAvatar(new Avatar(
-                jwt.getClaim("name").toString().toUpperCase(Locale.ROOT))
-        );
+        if (jwt.getClaim("name") != null) {
+            getNavigationBar().setAvatar(
+                    new Avatar(
+                            jwt.getClaim("name").toString().toUpperCase(Locale.ROOT)
+                    )
+            );
+        }
     }
 }
