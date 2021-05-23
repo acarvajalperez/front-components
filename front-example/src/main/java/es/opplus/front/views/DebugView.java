@@ -1,5 +1,6 @@
 package es.opplus.front.views;
 
+import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -8,6 +9,7 @@ import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import es.opplus.front.components.cards.CardComponent;
 import io.quarkus.oidc.RefreshToken;
 import io.quarkus.security.Authenticated;
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -21,7 +23,6 @@ import javax.inject.Inject;
  */
 @PageTitle("view.inbox.debug")
 @Route(value = "debug", layout = TasksInbox.class)
-@Authenticated
 public class DebugView extends VerticalLayout implements AfterNavigationObserver {
 
     /**
@@ -46,13 +47,11 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
     TextArea textAreaVaadinSession;
 
     public DebugView() {
-        textAreaVaadinSession = new TextArea("Vaadin Session:");
+        textAreaVaadinSession = new TextArea();
         textAreaVaadinSession.setWidthFull();
-        textAreaVaadinSession.setReadOnly(true);
 
-        add(textAreaVaadinSession);
+        add(new CardComponent(FontAwesome.Solid.CERTIFICATE.create(), "Vaadin Session", textAreaVaadinSession));
         //grid = new Grid<>;
-
     }
 
     /**
@@ -70,20 +69,19 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
                 "Last Request Timestamp: " + UI.getCurrent().getSession().getLastRequestTimestamp() + System.lineSeparator() +
                 "Locale: " + UI.getCurrent().getSession().getLocale().toString()
         );
-        showTokenInfo("ID Token: ", idToken);
-        showTokenInfo("Access Token: ", accessToken);
+        showTokenInfo("ID Token", idToken);
+        showTokenInfo("Access Token", accessToken);
         //showTokenInfo();
-        add(refreshToken.getToken());
+        //add(refreshToken.getToken());
     }
 
-    public void showTokenInfo(String description, JsonWebToken jwt) {
+    public void showTokenInfo(String description, JsonWebToken jwt)  {
         TextArea textArea = new TextArea();
-        textArea = new TextArea(description);
+        textArea = new TextArea();
         textArea.setWidthFull();
         //textArea.setReadOnly(true);
 
         textArea.setValue(jwt.toString());
-        add(new TextField("Preferred username", jwt.getClaim("preferred_username").toString()));
         System.out.println("Claims: " + jwt.getClaimNames());
         System.out.println("Issuer: " + jwt.getIssuer());
         System.out.println("Subject: " + jwt.getSubject());
@@ -93,6 +91,6 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
         for (String claim : jwt.getClaimNames()) {
             textArea.setValue(textArea.getValue() + claim + ": " + jwt.getClaim(claim).toString() + System.lineSeparator() + System.lineSeparator());
         }
-        add(textArea);
+        add(new CardComponent(FontAwesome.Solid.CERTIFICATE.create(), description, textArea));
     }
 }

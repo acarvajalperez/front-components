@@ -171,12 +171,12 @@ public abstract class OpplusLayout extends AppLayout {
     protected Tab createMenuItem(IronIcon icon, String text, Component suffix, Class<? extends Component> navigationTarget) {
         final Tab tab = new Tab();
         HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setWidthFull();
 
-        icon.setSize("32px");
+        icon.setClassName("pro-drawer-menu-item-icon");
 
         Label tabText = new Label(text);
-        //tabText.getStyle().set("margin-left", "10px");
-        //tabText.setClassName("pro-drawer-group-item");
+        tabText.setClassName("pro-drawer-menu-item-text");
         tabText.setWidthFull();
 
         horizontalLayout.add(icon, tabText);

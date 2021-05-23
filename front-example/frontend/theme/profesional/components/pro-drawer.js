@@ -34,6 +34,33 @@ $_documentContainer.innerHTML = `
         margin-right: 2em;
     }
 
+    .pro-drawer-menu-item-icon {
+        min-width: 2.5em;
+        max-width: 2.5em;
+        //min-height: 1.5em;
+        //max-height: 1.5em;
+        margin-left: 1em;
+        //min-width: calc (var(--lumo-icon-size-l) * 0.5);
+        //min-height: calc (var(--lumo-icon-size-m) * 0.5);
+    }
+
+    .pro-drawer-menu-item-text {
+        font-size: 1.3em;
+        //color: gray;
+        align-self: center;
+    }
+
+    .pro-drawer-menu-item-text:hover {
+        font-size: 1.3em;
+        color: black;
+        align-self: center;
+    }
+
+    .pro-drawer-menu-item-suffix {
+        background: red;
+        border-radius: 5px;
+    }
+
       /*
 
 

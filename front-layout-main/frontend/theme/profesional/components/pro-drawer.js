@@ -77,12 +77,16 @@ $_documentContainer.innerHTML = `
     }
 
     .pro-drawer-group-item {
-        width: 100%;
-        padding: var(--lumo-space-s);
-        color: var(--lumo-secondary-text-color);
-        background-color: var(--lumo-base-color);
-        border-top-right-radius: 2em;
-        border-bottom-right-radius: 2em;
+        margin-left: 10px;
+        font-size: 1.5em;
+        align-self: center;
+
+        //width: 100%;
+        //padding: var(--lumo-space-s);
+        //color: var(--lumo-secondary-text-color);
+        //background-color: var(--lumo-base-color);
+        //border-top-right-radius: 2em;
+        //border-bottom-right-radius: 2em;
     }
 
     .pro-drawer-group-item:hover {
@@ -108,8 +112,10 @@ $_documentContainer.innerHTML = `
     }
 
     .pro-drawer-group-item-icon {
-        width: 3.5em;
-        height: 1.5em;
+        min-width: 3.5em;
+        max-width: 3.5em;
+        //min-height: 1.5em;
+        //max-height: 1.5em;
         margin-left: 1em;
         //min-width: calc (var(--lumo-icon-size-l) * 0.5);
         //min-height: calc (var(--lumo-icon-size-m) * 0.5);

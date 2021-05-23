@@ -2,6 +2,7 @@ package es.opplus.front.components.cards;
 
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -15,65 +16,71 @@ import lombok.Getter;
 @JsModule("./theme/profesional/components/pro-card.js")
 public class CardComponent extends VerticalLayout {
 
-	@Getter private HorizontalLayout titleLayout;
-	private HorizontalLayout actionsLayout;
-	@Getter private Component content;
-	private IronIcon titleIcon;
-	private Label titleText;
-	private Button expandButton;
-	private IronIcon expandIconOn;
-	private IronIcon expandIconOff;
+    @Getter
+    private HorizontalLayout titleLayout;
+    private HorizontalLayout actionsLayout;
+    @Getter
+    private HasStyle content;
+    private IronIcon titleIcon;
+    private Label titleText;
+    private IronIcon expandButton;
+    private IronIcon expandIconOn;
+    private IronIcon expandIconOff;
 
-	public CardComponent(IronIcon icon, String title, Component component) {
-		super();
+    public <T extends Component & HasStyle> CardComponent(IronIcon icon, String title, T component) {
+        super();
+        addClassName("pro-card");
 
-		content = component;
-		addClassName("pro-card");
+        content = component;
+        content.addClassName("pro-card-content");
 
-		titleIcon = icon;
-		titleIcon.addClassName("pro-card-title-icon");
+        titleIcon = icon;
+        titleIcon.addClassName("pro-card-title-icon");
 
-		titleText = new Label(title);
-		titleText.addClassName("pro-card-title-text");
+        titleText = new Label(title);
+        titleText.addClassName("pro-card-title-text");
 
-		expandIconOn = FontAwesome.Solid.ANGLE_DOWN.create();
-		expandIconOff = FontAwesome.Solid.ANGLE_RIGHT.create();
+        expandIconOn = FontAwesome.Solid.ANGLE_DOWN.create();
+        expandIconOff = FontAwesome.Solid.ANGLE_UP.create();
 
-		expandButton = new Button(expandIconOn);
-		expandButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-		expandButton.addClickListener(listener -> {
-			content.setVisible(!content.isVisible());
-		});
+        expandIconOn.addClickListener(listener -> {
+            component.setVisible(!component.isVisible());
+            //titleLayout.replace(expandIconOn, expandIconOff);
+        });
 
-		actionsLayout = new HorizontalLayout();
+        expandIconOff.addClickListener(listener -> {
+            component.setVisible(!component.isVisible());
+            //titleLayout.replace(expandIconOff, expandIconOn);
+        });
 
-		titleLayout = new HorizontalLayout(titleIcon,
-				titleText /* , actionsLayout/*, addConversationButton, actionsLayout , expandButton */);
-		titleLayout.addClassName("pro-card-title-layout");
-		add(titleLayout, component);
-	}
+        actionsLayout = new HorizontalLayout();
 
-	@Override
-	public void add(Component... components) {
-		for (Component item : components) {
-			if (item instanceof HasActions)
-				for (Button action : ((HasActions) item).getActions())
-					addAction(action);
-			super.add(item);
-		}
-	}
+        titleLayout = new HorizontalLayout(titleIcon, titleText, actionsLayout, /*, addConversationButton, actionsLayout ,*/ expandIconOff, expandIconOn);
+        titleLayout.addClassName("pro-card-title-layout");
+        add(titleLayout, component);
+    }
 
-	private CardComponent addAction (Button action) {
-		if (action != null) {
-			action.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-			action.getStyle().set("background-color", "var(--lumo-primary-text-color)");
-			action.setClassName("pro-card-title-action");
-			titleLayout.add(action);
-		}
-		return this;
-	}
+    @Override
+    public void add(Component... components) {
+        for (Component item : components) {
+            if (item instanceof HasActions)
+                for (Button action : ((HasActions) item).getActions())
+                    addAction(action);
+            super.add(item);
+        }
+    }
 
-	public void setTitle(String title) {
-		titleText.setText(title);
-	}
+    private CardComponent addAction(Button action) {
+        if (action != null) {
+            action.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+            action.getStyle().set("background-color", "var(--lumo-primary-text-color)");
+            action.setClassName("pro-card-title-action");
+            titleLayout.add(action);
+        }
+        return this;
+    }
+
+    public void setTitle(String title) {
+        titleText.setText(title);
+    }
 }
