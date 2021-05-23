@@ -13,7 +13,6 @@ public class NavigationBar extends HorizontalLayout {
 
     private Label   titleComponent;
     private Avatar  avatar;
-    private Button  appIndex;
 
     public NavigationBar(Component logo, String titleString, Component... actions) {
         addClassName("nav-bar");

@@ -6,9 +6,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 
 public class NoDocumentViewer extends DocumentViewer {
     public NoDocumentViewer() {
-
         this.setAlignItems(Alignment.CENTER);
-        // this.setAlignSelf(Alignment.CENTER);
         this.getStyle().set("align-self", "center");
 
         IronIcon icon = FontAwesome.Solid.FILE_ALT.create();

@@ -43,15 +43,8 @@ public class CardComponent extends VerticalLayout {
         expandIconOn = FontAwesome.Solid.ANGLE_DOWN.create();
         expandIconOff = FontAwesome.Solid.ANGLE_UP.create();
 
-        expandIconOn.addClickListener(listener -> {
-            component.setVisible(!component.isVisible());
-            //titleLayout.replace(expandIconOn, expandIconOff);
-        });
-
-        expandIconOff.addClickListener(listener -> {
-            component.setVisible(!component.isVisible());
-            //titleLayout.replace(expandIconOff, expandIconOn);
-        });
+        expandIconOn.addClickListener(listener -> component.setVisible(!component.isVisible()));
+        expandIconOff.addClickListener(listener -> component.setVisible(!component.isVisible()));
 
         actionsLayout = new HorizontalLayout();
 

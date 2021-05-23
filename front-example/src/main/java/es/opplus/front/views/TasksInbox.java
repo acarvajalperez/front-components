@@ -10,7 +10,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -60,7 +59,7 @@ public class TasksInbox extends OpplusLayout implements AfterNavigationObserver 
                 createMenuItem(FontAwesome.Solid.INBOX.create(), "Pendientes", button, GlobalInboxView.class),
                 createMenuItem(FontAwesome.Solid.INBOX.create(), "Personal", button, PersonalInboxView.class),
                 createMenuItem(FontAwesome.Solid.DOWNLOAD.create(), "Operaciones", null, OperationsView.class),
-                createMenuItem(FontAwesome.Solid.COG.create(), "Services", null, ServiceInterfacesRoute.class),
+                createMenuItem(FontAwesome.Solid.COG.create(), "Services", null, ServicesView.class),
                 createMenuItem(FontAwesome.Solid.BUG.create(), "Debug", null, DebugView.class),
                 createMenuItem(FontAwesome.Solid.ROBOT.create(), "Robots", null, RobotView.class)
         };

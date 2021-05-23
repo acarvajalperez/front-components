@@ -11,7 +11,6 @@ import com.vaadin.flow.router.Route;
 import es.opplus.front.services.CustomErrorHandler;
 import es.opplus.front.services.CustomSystemMessagesProvider;
 import es.opplus.front.services.ResourceBundleI18nProvider;
-import es.opplus.front.views.TasksInbox;
 
 import java.util.Locale;
 
@@ -23,8 +22,8 @@ import java.util.Locale;
  */
 @PageTitle("Service Interfaces Demo | Vaadin Quarkus Demo")
 @Route(value = "services", layout = TasksInbox.class)
-public class ServiceInterfacesRoute extends VerticalLayout {
-    public ServiceInterfacesRoute() {
+public class ServicesView extends VerticalLayout {
+    public ServicesView() {
         add(new Paragraph("Demoes Vaadin service interfaces implemented by beans"));
 
         add(new H2("Error Handler"));

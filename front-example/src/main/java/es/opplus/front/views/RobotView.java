@@ -7,7 +7,7 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import es.opplus.robots.Agente;
+import es.opplus.robots.RobotLauncher;
 import es.opplus.front.components.cards.CardComponent;
 
 /**
@@ -22,7 +22,6 @@ public class RobotView extends VerticalLayout {
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(true);
         layout.setSizeFull();
-        //div.addClassName("");
         layout.getStyle().set("border-style","solid");
         layout.getStyle().set("border-color","lightgray");
         layout.getStyle().set("border-width","thin");
@@ -30,19 +29,9 @@ public class RobotView extends VerticalLayout {
 
         layout.add(new H2("Direcciones organismos oficiales"));
         layout.add(new Paragraph("Este robot descarga las direcciones de todos los organismos oficiales."));
-        layout.add(new Button("Start", e -> { new Agente(); }));
+        layout.add(new Button("Start", e -> new RobotLauncher()));
 
         CardComponent card = new CardComponent(FontAwesome.Solid.ROBOT.create(), "Demostración de lanzadera de robots", layout);
         add(card);
-
-        //add(new H2("Robot2 - Chromium"));
-        //add(new Paragraph("Este robot lanza una instancia de Chromium embebido en la aplicación"));
-        //add(new Button("Start", e -> { new Robot2(); }));
-
-        /*
-        add(new Button("Lanza Robot", listener -> {
-            Agente agente = new Agente();
-        }));
-         */
     }
 }

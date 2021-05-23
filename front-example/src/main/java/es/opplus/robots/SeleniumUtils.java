@@ -8,16 +8,11 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Agente {
+public class SeleniumUtils {
 
-    public Agente() {
-        setupChromeDriver();
-        new Thread(new Robot1()).start();
-    }
+    public static void setupChromeDriver() {
 
-    private static void setupChromeDriver() {
-
-        ClassLoader classLoader = Agente.class.getClassLoader();
+        ClassLoader classLoader = RobotLauncher.class.getClassLoader();
 
         URL resource = classLoader.getResource("/chromedrivers/linux/chromedriver");
         File f = new File("driver");
@@ -42,7 +37,6 @@ public class Agente {
         }
         System.setProperty("webdriver.chrome.driver", chromeDriver.getAbsolutePath());
     }
-
 
     /*
     // The ChromeDriver locations under the resource folder
