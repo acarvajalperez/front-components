@@ -29,6 +29,7 @@
         <module>front-layout-main</module>
         <module>front-template</module>
         <module>front-example</module>
+        <module>front-micro-parent</module>
     </modules>
 
     <repositories>

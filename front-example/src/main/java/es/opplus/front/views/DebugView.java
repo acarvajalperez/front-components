@@ -2,8 +2,11 @@ package es.opplus.front.views;
 
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -15,6 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Port of the "Skeleton Starter" Vaadin app on top of Quarkus+Undertow.
@@ -51,7 +57,6 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
     public DebugView() {
         textAreaVaadinSession = new TextArea();
         textAreaVaadinSession.setWidthFull();
-
         add(new CardComponent(FontAwesome.Solid.CERTIFICATE.create(), "Vaadin Session", textAreaVaadinSession));
     }
 
@@ -77,11 +82,26 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
     }
 
     public void showTokenInfo(String description, JsonWebToken jwt)  {
-        TextArea textArea = new TextArea();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        FormLayout layout = new FormLayout();
+        layout.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("10em", 1),
+                new FormLayout.ResponsiveStep("10em", 2),
+                new FormLayout.ResponsiveStep("10em", 3)
+        );
+
+        TextField expirationDateField = new TextField("Expiration Date");
+        expirationDateField.setReadOnly(true);
+
+        TextField expirationDateField2 = new TextField("Expiration Date");
+        expirationDateField2.setReadOnly(true);
+
+        TextArea textArea = new TextArea("Token info");
         textArea.setWidthFull();
         textArea.setReadOnly(true);
 
-        textArea.setValue(jwt.toString());
+        //textArea.setValue(jwt.toString());
         logger.info("Claims: " + jwt.getClaimNames());
         logger.info("Issuer: " + jwt.getIssuer());
         logger.info("Subject: " + jwt.getSubject());
@@ -90,7 +110,15 @@ public class DebugView extends VerticalLayout implements AfterNavigationObserver
 
         for (String claim : jwt.getClaimNames()) {
             textArea.setValue(textArea.getValue() + claim + ": " + jwt.getClaim(claim).toString() + System.lineSeparator() + System.lineSeparator());
+            if (claim.equals("exp"))
+                expirationDateField.setValue(jwt.getClaim(claim).toString());
+            if (claim.equals("iat"))
+                expirationDateField2.setValue(jwt.getClaim(claim).toString());
+
         }
-        add(new CardComponent(FontAwesome.Solid.CERTIFICATE.create(), description, textArea));
+
+        layout.add(expirationDateField, expirationDateField2);
+        layout.add(textArea,3);
+        add(new CardComponent(FontAwesome.Solid.CERTIFICATE.create(), description, layout));
     }
 }
