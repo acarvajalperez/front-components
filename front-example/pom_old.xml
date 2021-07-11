@@ -169,6 +169,13 @@
             <artifactId>commons-io</artifactId>
             <version>2.8.0</version>
         </dependency>
+        <dependency>
+            <groupId>es.opplus.front</groupId>
+            <artifactId>front-micro-app-catalog</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
     <repositories>
         <repository>

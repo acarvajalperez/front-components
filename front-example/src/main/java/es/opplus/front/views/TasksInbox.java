@@ -33,13 +33,13 @@ public class TasksInbox extends OpplusLayout implements AfterNavigationObserver 
 
     public TasksInbox() {
         addAction(FontAwesome.Solid.TOOLBOX.create(), e -> {
-            UI.getCurrent().navigate(ApplicationIndexView.class);
+            UI.getCurrent().navigate(AppCatalogView.class);
         });
         addAction(FontAwesome.Solid.BELL.create(), e -> {
-            UI.getCurrent().navigate(ApplicationIndexView.class);
+            UI.getCurrent().navigate(AppCatalogView.class);
         });
         addAction(FontAwesome.Solid.TH.create(), e -> {
-            UI.getCurrent().navigate(ApplicationIndexView.class);
+            UI.getCurrent().navigate(AppCatalogView.class);
         });
     }
 

@@ -1,0 +1,22 @@
+.micro-app-catalog {
+        padding: 5em;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 150px 150px 150px 150px;
+        grid-template-rows: 150px 150px 150px;
+        column-gap: 15px;
+        row-gap: 15px;
+}
+
+/*
+.micro-app-catalog j-card {
+	display: inline-block;
+	width: 100%;
+	vertical-align: top;
+}
+
+.micro-app-catalog vaadin-chart {
+	height: 200px; 
+	--vaadin-charts-color-1: #ff8d008c;
+}
+*/

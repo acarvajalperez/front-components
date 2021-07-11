@@ -105,7 +105,7 @@ $_documentContainer.innerHTML = `
 
 
 
-        --pro-logo-url: url('./img/logo_OPPLUS.png');
+        --pro-logo-url: url('./img/logo_OPPLUS_40.png');
         --pro-header-color: rgb(232, 245, 236);
 
         --lumo-base-color: #FFFFFF;
